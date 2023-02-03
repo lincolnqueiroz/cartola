@@ -2,7 +2,7 @@ import apiInstance from "../apiInstance";
 
 /**
  * Resgata informação da API
- * @param {String} setMessage - Função para atualizar variável message
+ * @param {function} setMessage - Função para atualizar variável message
  */
 function fetchHelloWorld(setMessage){
     const url = "/api/hello-world";
