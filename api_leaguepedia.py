@@ -14,13 +14,12 @@ response = site.api('cargoquery',
 	limit = 'max',
 	tables = "ScoreboardGames=SG, MatchScheduleGame=MSG, PostgameJsonMetadata=PJM",
     join_on = "SG.GameId=MSG.GameId, MSG.RiotPlatformGameId=PJM.RiotPlatformGameId",
-	fields = "SG.Tournament, SG.Team1, SG.Team2, SG.DateTime_UTC, PJM.StatsPage",
+	fields = "SG.Tournament, SG.Team1, SG.Team2, SG.DateTime_UTC, PJM.StatsPage, PJM.TimelinePage",
     where = "SG.Tournament = 'CBLOL 2023 Split 1' AND SG.DateTime_UTC >= '" + str(date) + "' AND (SG.Team1 = 'FURIA' OR SG.Team2 = 'FURIA')",
     order_by = "SG.DateTime_UTC"
 )
 
-print(json.dumps(response, indent=2))
-
+#print(json.dumps(response, indent=2))
 dic = {
     ' ':'%20',
     ':':'%3A',
@@ -43,6 +42,11 @@ response_gs = requests.get("https://lol.fandom.com/api.php?action=query&format=j
 
 gs = json.dumps(response_gs.json(), indent=2)
 
-gs = str(gs).replace('\\n','\n')
+gs = str(gs).replace('\\n','\n').replace('\\"', '"').replace('"{', '{').replace('}"','}')
+#print(gs)
+gs = json.loads(gs)
 
-print(gs)
+pageId = str(list(gs["query"]["pages"].keys())[0])
+
+print(gs["query"]["pages"][pageId]["revisions"][0]["slots"]["main"]["*"])
+
