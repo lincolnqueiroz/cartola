@@ -29,20 +29,19 @@ def getAllCurrentCBLOLTeams():
         print("Erro na cargoquery")
     
 
-def getAllCurrentCBLOLOLPayers():
+def getAllCurrentCBLOLPayers():
     try:
         site = mwclient.Site('lol.fandom.com', path='/')
     except:
         print("Não pode conectar com leaguepedia")
     
     try:
-        print(str(getAllCurrentCBLOLTeams()))
         response = site.api('cargoquery',
             limit = 'max',
             tables = "Players=P, Teams=T",
             join_on = "P.Team = T.Name",
             fields = "P.ID  , P.Team, P.Role",
-            where = "T.Name in " + str(getAllCurrentCBLOLTeams()).replace('[','(').replace(']',')'),
+            where = "P.Role in ('Top','Jungle','Mid','Bot','Support') AND T.Name in " + str(getAllCurrentCBLOLTeams()).replace('[','(').replace(']',')'),
         )
         try:
             players = []

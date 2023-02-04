@@ -1,25 +1,32 @@
 import mwclient
 import requests
-import time
 import json
 import datetime as dt
-from datetime import date, timedelta
+from datetime import date 
 
 date="2023-01-29"
 date=dt.datetime.strptime(date, "%Y-%m-%d")
 
 site = mwclient.Site('lol.fandom.com', path='/')
 
+# response = site.api('cargoquery',
+# 	limit = 'max',
+# 	tables = "ScoreboardGames=SG, MatchScheduleGame=MSG, PostgameJsonMetadata=PJM",
+#     join_on = "SG.GameId=MSG.GameId, MSG.RiotPlatformGameId=PJM.RiotPlatformGameId",
+# 	fields = "SG.Tournament, SG.Team1, SG.Team2, SG.DateTime_UTC, PJM.StatsPage, PJM.TimelinePage",
+#     where = "SG.Tournament = 'CBLOL 2023 Split 1' AND SG.DateTime_UTC >= '" + str(date) + "' AND (SG.Team1 = 'FURIA' OR SG.Team2 = 'FURIA')",
+#     order_by = "SG.DateTime_UTC"
+# )
+
 response = site.api('cargoquery',
-	limit = 'max',
-	tables = "ScoreboardGames=SG, MatchScheduleGame=MSG, PostgameJsonMetadata=PJM",
-    join_on = "SG.GameId=MSG.GameId, MSG.RiotPlatformGameId=PJM.RiotPlatformGameId",
-	fields = "SG.Tournament, SG.Team1, SG.Team2, SG.DateTime_UTC, PJM.StatsPage, PJM.TimelinePage",
-    where = "SG.Tournament = 'CBLOL 2023 Split 1' AND SG.DateTime_UTC >= '" + str(date) + "' AND (SG.Team1 = 'FURIA' OR SG.Team2 = 'FURIA')",
-    order_by = "SG.DateTime_UTC"
+    limit = 'max',
+    tables = "Tournaments=T, Leagues=L",
+    join_on = " T.League = L.League",
+    fields = "T.Name",
+    where = "L.League_Short = 'CBLOL'", # AND T.Date >= '" + str(date.today()) + "'",
 )
 
-#print(json.dumps(response, indent=2))
+print(json.dumps(response, indent=2))
 dic = {
     ' ':'%20',
     ':':'%3A',
