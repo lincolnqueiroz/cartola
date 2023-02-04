@@ -2,6 +2,6 @@
 *.log
 *.pot
 *.pyc
-backend/__pycache__
-backend/migrations
-backend/media
+**/__pycache__
+**/migrations
+**/media
