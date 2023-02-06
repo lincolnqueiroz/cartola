@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CLIENT_ID = "slcH0BsxRKVKLojo3wg6Z2MnxXZvFSmXd7JX2o8S"
+CLIENT_SECRET = "20OZqOxX1yRMweiPbD9wWv3jXhDgfZWJYxmzCbHRKnzz6CZiwF7HuPQyNeT3S1Z6JQ89mXxaWCzulZbSeMmMWoi3HmDHWQTMaFOTkL3K4KQw5bYnu1okxXHjaZ6RwWY2"
 
 # Application definition
 
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'oauth2_provider',
+    'corsheaders',
     #myapps
     'api',
 ]
@@ -49,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'backend.urls'
 

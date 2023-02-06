@@ -9,32 +9,14 @@ function Homepage() {
 
   const handleSave = (event) =>{
     event.preventDefault()
-    let jogadorJSON = {
-      "name": name,
-      "role": role
-    };
-    apiCalls.fetchCreateJogador(jogadorJSON);
+    console.log("Clickou");
+    apiCalls.fetchLogin("admin","admin");
   };
 
   return (
-    <Box component={"form"} onSubmit={handleSave}>
-      <FormGroup>
-        <FormControl>
-          <TextField
-            value={name}
-            onChange={(event) => {setName(event.target.value)}}
-          />
-          <TextField
-            value={role}
-            onChange={(event) => {setRole(event.target.value)}}
-          />
-          <Button variant='contained' type='submit'>
-            Submit
-          </Button>
-        </FormControl>
-      </FormGroup>
-    
-    </Box>
+    <Button onClick={handleSave}>
+      Login
+    </Button>
 
   )
 }
