@@ -8,6 +8,7 @@ django.setup()
 
 from api.models import *
 from api import getLPInfo
+from django.contrib.auth.models import User
 
 class MyParser(argparse.ArgumentParser):
     def error(self, message):
@@ -63,6 +64,29 @@ if __name__ == "__main__":
     sys.argv[1] = "migrate"
     manage.main()
 
+    print("\nLimpando o banco")
     clean_db()
 
+    print("\nCriando superuser")
+    try:
+        superuser = User.objects.create_superuser(username="admin",email="admin@admin.com",password="admin")
+        superuser.save()
+    except:
+        print("Superuser já existe")
+    
+    print("\nRegistrando aplicação")
+    try:
+        sys.argv=[sys.argv[0],"","","","","","",""]
+        sys.argv[1] = "createapplication"
+        sys.argv[2] = "confidential"
+        sys.argv[3] = "password"
+        sys.argv[4] = "--client-id"
+        sys.argv[5] = "slcH0BsxRKVKLojo3wg6Z2MnxXZvFSmXd7JX2o8S"
+        sys.argv[6] = "--client-secret"
+        sys.argv[7] = "20OZqOxX1yRMweiPbD9wWv3jXhDgfZWJYxmzCbHRKnzz6CZiwF7HuPQyNeT3S1Z6JQ89mXxaWCzulZbSeMmMWoi3HmDHWQTMaFOTkL3K4KQw5bYnu1okxXHjaZ6RwWY2"
+        manage.main()
+    except:    
+        print("Não foi possível registrar aplicação")
+
+    print("\nPopulando o banco")
     popula_db()
