@@ -2,6 +2,7 @@ version: '1'
 
 services:
   db:
+    restart: always
     image: postgres
     environment:
       - POSTGRES_DB=postgres
@@ -9,6 +10,8 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   backend:
+    depends_on:
+      - db
     build:
       context: ./backend
     restart: always
@@ -20,6 +23,8 @@ services:
       - ./backend:/app/backend
 
   frontend:
+    depends_on:
+      - db
     build:
       context: ./frontend
     container_name: frontend
