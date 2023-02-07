@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +14,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import apiCalls from '../apiCalls/apiCalls';
+
+import {useSelector, useDispatch} from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -34,16 +38,19 @@ export default function LoginPage() {
     const [emailNull, setEmailNull] = React.useState(false);
     const [password, setPassword] = React.useState("");
     const [passwordNull, setPasswordNull] = React.useState(false);
+
+    const isLoggedIn = useSelector((state)=>state.isLoggedIn);
+    const accessToken = useSelector((state)=>state.accessToken);
+    const dispatch = useDispatch();
+
     const handleSubmit = (event) => {  
         event.preventDefault();
-        if(email === ""){
-            setEmailNull(true);   
-        }
-        if(password === ""){
-            setPasswordNull(true);
-        }
-        else{
-            apiCalls.fetchLogin(email, password);
+
+        setEmailNull(email === "");   
+         setPasswordNull(password === "");
+
+        if (!emailNull && !passwordNull){
+            apiCalls.fetchLogin(email, password,dispatch);
         }
         /* const data = new FormData(event.currentTarget);
         console.log({
@@ -51,6 +58,11 @@ export default function LoginPage() {
             password: data.get('password'),
         }); */
   };
+  useEffect(()=>{
+    if (isLoggedIn){
+      useNavigate("/");
+    }
+  },[accessToken,isLoggedIn]);
 
   return (
     <ThemeProvider theme={theme}>
