@@ -6,7 +6,6 @@ import { Outlet, Navigate} from 'react-router-dom'
 function ProtectRoutes() {
     const isLoggedIn = useSelector((state)=>state.isLoggedIn);
     const accessToken = useSelector((state)=>state.accessToken);
-    console.log(isLoggedIn);
 
     if (!isLoggedIn){
     // if (true){
