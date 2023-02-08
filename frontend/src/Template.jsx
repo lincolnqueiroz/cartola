@@ -1,13 +1,24 @@
-import Header from './components/Header'
+import {useRef, useState} from 'react';
+import Navbar from './components/Geral/Navbar';
+import Sidebar from './components/Geral/Sidebar';
+
+import { Box, Button, Drawer, Grid, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 
 function Template(props){
-    return (
-        <>
-            <Header />
-            {props.children}
-        </>
-        
-
+    const ref = useRef();
+    const openSideBar = () => {
+        ref.current.openSideBar();
+    }
+    return (            
+            <Grid container>
+                <Grid item xs={12}>
+                    <Navbar openSideBar={openSideBar}/>
+                    <Sidebar ref={ref}/>
+                </Grid>
+                <Grid item xs={12}>
+                    {props.children}
+                </Grid>   
+            </Grid>
     )
 }
 

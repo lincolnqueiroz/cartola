@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Box, Paper, Typography, Toolbar, AppBar, FormGroup, FormControl, TextField, Button } from "@mui/material";
 import apiCalls from '../apiCalls/apiCalls';
+import Template from '../Template';
 
 function Homepage() {
 
@@ -14,9 +15,9 @@ function Homepage() {
   };
 
   return (
-    <Button onClick={handleSave}>
-      Login
-    </Button>
+    <Template>
+      <Typography variant='h1'>Home</Typography>
+    </Template>
 
   )
 }

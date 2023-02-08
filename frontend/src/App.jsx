@@ -8,11 +8,7 @@ function App() {
   const [message, setMessage] = useState('')
   //apiCalls.fetchHelloWorld(setMessage);
   return (
-    <Template 
-      children = {
-        <Links />
-      }
-    />
+    <Links />
   )
 }
 
