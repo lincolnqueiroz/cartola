@@ -3,12 +3,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import isLoggedInReducer from "./slices/isLoggedInSlice";
 import accessTokenReducer from "./slices/accessTokenSlice";
 import usernameReducer from "./slices/usernameSlice";
+import walletReducer from "./slices/walletSlice";
+import nickReducer from "./slices/nickSlice";
 
 const store = configureStore({
     reducer: {
         accessToken: accessTokenReducer,
         isLoggedIn: isLoggedInReducer,
+        wallet: walletReducer,
         username: usernameReducer,
+        nick: nickReducer,
     }
 })
 

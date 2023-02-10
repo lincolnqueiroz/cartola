@@ -90,10 +90,6 @@ const Sidebar = forwardRef((props, ref) => {
                         <Typography>{username}</Typography>
                     </Grid>
                 </Grid>
-
-                <IconButton onClick={() => {closeSideBar(sideBar)}} xs={{alignItems:"start"}}>
-                    <MenuIcon />
-                </IconButton>
                 
                 
             </DrawerHeader>
@@ -102,7 +98,7 @@ const Sidebar = forwardRef((props, ref) => {
                 <Grid item xs={8}>
                     <List>
                         <ListItem>
-                            <ListItemButton>
+                            <ListItemButton onClick={()=>{navigate("/profile")}}>
                                 <ListItemText primary={"Conta"}/>
                             </ListItemButton>
                         </ListItem>
