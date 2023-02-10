@@ -6,6 +6,7 @@ import Escalacao from './pages/Escalacao'
 import Homepage from './pages/Homepage'
 import LoginPage from './pages/Loginpage'
 import NotFound from './pages/NotFound'
+import Conta from './pages/Conta'
 function Links() {
 
   return (
@@ -16,6 +17,7 @@ function Links() {
         <Route element={<ProtectRoutes/>}>
           <Route path='*' element={<NotFound/>} />
           <Route exact path='/escalacao' element={<Escalacao/>} />
+          <Route exact path='/profile' element={<Conta/>} />
           <Route exact path='/' element={<Homepage/>} />
         </Route>
         
