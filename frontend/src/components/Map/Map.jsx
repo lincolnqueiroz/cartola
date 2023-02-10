@@ -13,6 +13,7 @@ function Map() {
                         backgroundSize:"100%",
                         backgroundRepeat:"no-repeat",
                         height:"450px",
+                        width:"660px"
     }}>
         <Grid item xs={12} sx={{justifyItems:"center", height:"25%"}}>
             <IconButton sx={{top:"60%", left:"20%"}}>

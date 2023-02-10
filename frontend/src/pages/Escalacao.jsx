@@ -14,7 +14,7 @@ function Escalacao() {
 
     <Template>
       <Grid container sx={{m:5}}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ml:3}}>
           <Typography variant='h5'>SUA ESCALAÇÃO</Typography>
         </Grid>
         <Divider/>

@@ -34,8 +34,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LoginPage() {
-    const [email, setEmail] = React.useState("");
-    const [emailNull, setEmailNull] = React.useState(false);
+    const [username, setUsername] = React.useState("");
+    const [usernameNull, setUsernameNull] = React.useState(false);
     const [password, setPassword] = React.useState("");
     const [passwordNull, setPasswordNull] = React.useState(false);
 
@@ -46,15 +46,15 @@ export default function LoginPage() {
     const handleSubmit = (event) => {  
         event.preventDefault();
 
-        setEmailNull(email === "");   
+        setUsernameNull(username === "");   
          setPasswordNull(password === "");
 
-        if (!emailNull && !passwordNull){
-            apiCalls.fetchLogin(email, password,dispatch);
+        if (!usernameNull && !passwordNull){
+            apiCalls.fetchLogin(username, password,dispatch);
         }
         /* const data = new FormData(event.currentTarget);
         console.log({
-            email: data.get('email'),
+            username: data.get('username'),
             password: data.get('password'),
         }); */
   };
@@ -103,17 +103,17 @@ export default function LoginPage() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                value={username}
                 onChange={(event)=> {
-                    setEmail(event.target.value);
-                    setEmailNull(false)
+                    setUsername(event.target.value);
+                    setUsernameNull(false)
                 }}
-                helperText={emailNull ? "Campo de preenchimento obrigatório." : null}
-                error={emailNull}
+                helperText={usernameNull ? "Campo de preenchimento obrigatório." : null}
+                error={usernameNull}
                 autoFocus
               />
               <TextField
