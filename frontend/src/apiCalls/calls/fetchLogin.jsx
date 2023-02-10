@@ -2,20 +2,21 @@ import apiInstance from "../apiInstance";
 import config from "../../../config";
 import { updateIsLoggedIn } from "../../storage/slices/isLoggedInSlice";
 import { updateAccessToken } from "../../storage/slices/accessTokenSlice";
+import { updateUsername } from "../../storage/slices/usernameSlice"
 /**
  * Cria jogador no banco
  * @param {string} email - Email para autenticação
  * @param {string} password - Password para autenticação
  * @param {function} dispatch - Função para gerenciar local storage
  */
-function fetchLogin(email,password,dispatch){
+function fetchLogin(username,password,dispatch){
     const url = "/api/token/";
 
     apiInstance({
         method: "POST",
         url: url,
         headers: {"Content-type":"application/x-www-form-urlencoded"}, 
-        data:("grant_type=password&client_secret=" + config.CLIENT_SECRET + "&client_id=" + config.CLIENT_ID + "&username=" + email + "&password=" + password),
+        data:("grant_type=password&client_secret=" + config.CLIENT_SECRET + "&client_id=" + config.CLIENT_ID + "&username=" + username + "&password=" + password),
         // {
         //     "grant_type": 'password',
         //     "username": email,
@@ -27,7 +28,7 @@ function fetchLogin(email,password,dispatch){
     })
     .then((response) => {
         dispatch(updateAccessToken(response.data["access_token"]));
-
+        dispatch(updateUsername(username));
         dispatch(updateIsLoggedIn(true));
         if (response.status != 200){
             console.log(response.content);
