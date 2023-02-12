@@ -8,7 +8,6 @@ django.setup()
 
 from api.models import *
 from api import getLPInfo
-from django.contrib.auth.models import User
 
 class MyParser(argparse.ArgumentParser):
     def error(self, message):
@@ -18,6 +17,8 @@ class MyParser(argparse.ArgumentParser):
 
 def clean_db():
     try:
+        for el in Escalacao.objects.all():
+            el.delete()
         for el in Pontuacao.objects.all():
             el.delete()
         for el in Jogo.objects.all():
@@ -25,6 +26,8 @@ def clean_db():
         for el in Jogador.objects.all():
             el.delete()
         for el in Time.objects.all():
+            el.delete()
+        for el in User.objects.all():
             el.delete()
     except:
         print("Erro ao limpar tabelas")
@@ -69,7 +72,7 @@ if __name__ == "__main__":
 
     print("\nCriando superuser")
     try:
-        superuser = User.objects.create_superuser(username="admin",email="admin@admin.com",password="admin")
+        superuser = User.objects.create_superuser(username="admin@admin.com",password="admin",nick="admin")
         superuser.save()
     except:
         print("Superuser já existe")

@@ -12,6 +12,7 @@ oauth2_endpoint_views = [
 urlpatterns = [
     path('hello-world', views.helloWorld, name='helloWorld'),
     path('criar-jogador', views.createJogador, name='createJogador'),
+    path('jogador/<role>/get', views.getJogador, name='getJogador'),
     path('authorize/', oauth2_views.AuthorizationView.as_view(), name="authorize"),
     path('token/', oauth2_views.TokenView.as_view(), name="token"),
     path('revoke-token/', oauth2_views.RevokeTokenView.as_view(), name="revoke-token"),

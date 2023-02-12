@@ -50,15 +50,24 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',    
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     'corsheaders.middleware.CorsMiddleware',
+
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'backend.urls'
+
+AUTHENTICATION_BACKENDS = [
+    'oauth2_provider.backends.OAuth2Backend',
+    # Uncomment following if you want to access the admin
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 TEMPLATES = [
     {
@@ -134,3 +143,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "api.User"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}

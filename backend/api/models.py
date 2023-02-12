@@ -1,7 +1,16 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractUser
+
+
 
 # Create your models here.
+
+class User(AbstractUser):
+    username = models.CharField(max_length=30, primary_key=True)
+    email = models.CharField(max_length=60, default=username)
+    nick = models.CharField(max_length=30)
+
 
 class Time(models.Model):
     name = models.CharField(max_length=30,primary_key=True)
@@ -28,9 +37,17 @@ class Jogador(models.Model):
 class Jogo(models.Model):
     data = models.DateTimeField()
     rodada = models.IntegerField()
-    TimeBlue = models.ForeignKey(Time,on_delete=models.CASCADE,related_name='time_blue')
-    TimeRed = models.ForeignKey(Time,on_delete=models.CASCADE,related_name='time_red')
+    time_blue = models.ForeignKey(Time,on_delete=models.CASCADE,related_name='time_blue')
+    time_red = models.ForeignKey(Time,on_delete=models.CASCADE,related_name='time_red')
 
+class Escalacao(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    rodada = models.IntegerField()
+    top = models.ForeignKey(Jogador, on_delete=models.CASCADE, related_name="top")
+    jg = models.ForeignKey(Jogador, on_delete=models.CASCADE, related_name="jg")
+    mid = models.ForeignKey(Jogador, on_delete=models.CASCADE, related_name="mid")
+    adc = models.ForeignKey(Jogador, on_delete=models.CASCADE, related_name="adc")
+    sup = models.ForeignKey(Jogador, on_delete=models.CASCADE, related_name="sup")
 
 class Pontuacao(models.Model):
     jogo = models.ForeignKey(Jogo,on_delete=models.CASCADE)

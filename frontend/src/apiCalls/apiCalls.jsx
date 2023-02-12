@@ -1,5 +1,6 @@
 import fetchHelloWorld from "./calls/fetchHelloWorld";
 import fetchCreateJogador from "./calls/fetchCreateJogador";
+import fetchGetPlayers from "./calls/fetchGetPlayers";
 import fetchLogin from "./calls/fetchLogin";
 
 const apiCalls = {
@@ -8,6 +9,9 @@ const apiCalls = {
 
     //url: /api/criar-jogador
     fetchCreateJogador,
+
+    //url: /api/jogador/role/get
+    fetchGetPlayers,
 
     //url: /api/token
     fetchLogin,
