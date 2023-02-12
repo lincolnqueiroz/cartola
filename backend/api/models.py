@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import AbstractUser
-
+import json
 
 
 # Create your models here.
@@ -32,7 +32,16 @@ class Jogador(models.Model):
     time = models.ForeignKey(Time,on_delete=models.SET_NULL, null=True)
     pathFoto = models.CharField(max_length=30,default='sem foto')
     valor = models.IntegerField(validators=[validate_valor],default=50)
+    historico_valor = models.CharField(max_length=200, default="[50]")
 
+    def getHistorico(self):
+        return json.loads(self.historico_valor)
+    def setHistorico(self,hist):
+        self.historico_valor = json.dumps(hist)
+    def updateHistorico(self):
+        oldHist = json.loads(self.historico_valor)
+        oldHist.append(self.valor)
+        self.historico_valor = json.dumps(oldHist)
 
 class Jogo(models.Model):
     data = models.DateTimeField()
