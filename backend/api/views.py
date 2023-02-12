@@ -3,6 +3,8 @@ from rest_framework.decorators import api_view, permission_classes
 from django.http import JsonResponse, HttpResponse
 from rest_framework.permissions import IsAuthenticated
 
+from api.models import Jogador
+
 from api.serializers import *
 
 import mwclient 

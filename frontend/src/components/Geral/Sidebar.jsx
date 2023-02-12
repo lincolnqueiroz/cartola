@@ -9,6 +9,8 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { removeAccessToken } from "../../storage/slices/accessTokenSlice";
+import { removeUsername } from "../../storage/slices/usernameSlice";
+
 import { removeIsLoggedIn, updateIsLoggedIn } from "../../storage/slices/isLoggedInSlice";
 import {useDispatch} from "react-redux";
 import iconSample from "../../assets/images/icon_sample.webp";
@@ -42,7 +44,7 @@ const Sidebar = forwardRef((props, ref) => {
     const handleLogout = () => {
         dispatch(removeAccessToken());
         dispatch(updateIsLoggedIn(false));
-        dispatch(removeIsUsername());
+        dispatch(removeUsername());
         dispatch(removeIsLoggedIn());
         navigate('/login');
     }

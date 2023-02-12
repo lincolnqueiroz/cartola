@@ -60,7 +60,7 @@ function PlayerList(props) {
                     </AccordionDetails>
                 </Accordion>
 
-                <Button variant='contained'>Escalar</Button>
+                <Button variant='contained' onClick={()=>{props.setPlayer(player); props.setClose(false)}}>Escalar</Button>
      
 
             </ListItem>
