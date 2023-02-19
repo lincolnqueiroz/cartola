@@ -11,6 +11,7 @@ function Escalacao() {
 
   const [name,setName] = useState("");
   const [escalacao,setEscalacao] = useState([null,null,null,null,null]);
+  const role = {0:"Top",1:"Jungle",2:"Mid",3:"AD Carry",4:"Support"};
   return (
 
     <Template>
@@ -20,157 +21,90 @@ function Escalacao() {
         </Grid>
         <Divider/>
         <Grid item xs={6} display={"flex"} justifyContent={"center"} alignContent={"center"} sx={{minWidth:"660px"}}>
-          <Map/>
+          <Map setEscalacao={setEscalacao}/>
         </Grid>
         <Grid item xs={6}>
           <Paper sx={{background:"grey"}}>
             Time
           </Paper>
           <List>
-            {escalacao.map((player) => {
-              {player ? 
-                <Box key={player.name}>
-                  <ListItem>
-                    <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
-                      <Grid item xs={3} justifyContent={"center"} sx={{
-                        backgroundImage:`url(${playerPic})`, 
-                        backgroundRepeat:"no-repeat",
-                        backgroundSize:"200px 150px",
-                        backgroundPosition:"center", 
-                        height:"150px", 
-                        width:"200px"}}>
-                      </Grid>
-                      <Grid item xs={4} sx={{justifyContent:"center"}}>
-                        <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>Grevthar</Typography>
-                      </Grid>
-                      <Grid item xs={3} justifyContent={"center"} sx={{
-                        backgroundImage:`url(${teamLogo})`, 
-                        backgroundRepeat:"no-repeat",
-                        backgroundSize:"200px 150px", 
-                        backgroundPosition:"center",
-                        height:"150px", 
-                        width:"200px"}}>
-                      </Grid>
-                      <Grid item xs={2}>
-                      <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>$19</Typography>
-                      </Grid>
+            {escalacao.map((player,index) => {
+              if (!player){
+                return(
+                  <>
+                  <ListItem key={index}>
+                  <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
+                    <Grid item>
+                      <Typography>{role[index]}</Typography>
                     </Grid>
-                  </ListItem>
-                  <Divider/>
-                </Box>
-                :
-                <Box key={player}></Box>
+                    <Grid item xs={3} justifyContent={"center"} sx={{
+                      // backgroundImage:`url(${playerPic})`, 
+                      backgroundRepeat:"no-repeat",
+                      backgroundSize:"200px 150px",
+                      backgroundPosition:"center", 
+                      height:"150px", 
+                      width:"200px"}}>
+                    </Grid>
+                    <Grid item xs={4} sx={{justifyContent:"center"}}>
+                      {/* <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>{player.name}</Typography> */}
+                    </Grid>
+                    <Grid item xs={3} justifyContent={"center"} sx={{
+                      // backgroundImage:`url(${teamLogo})`, 
+                      backgroundRepeat:"no-repeat",
+                      backgroundSize:"200px 150px", 
+                      backgroundPosition:"center",
+                      height:"150px", 
+                      width:"200px"}}>
+                    </Grid>
+                    <Grid item xs={2}>
+                    {/* <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>${player.valor}</Typography> */}
+                    </Grid>
+                  </Grid>
+                  
+
+                </ListItem>
+                <Divider/>
+                </>
+                  ); 
               }
+              else
+              return (
+                <>
+                <ListItem key={player.name}>
+                  <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
+                  <Grid item xs={1}>
+                      <Typography>{role[index]}</Typography>
+                    </Grid>
+                    <Grid item xs={3} justifyContent={"center"} sx={{
+                      backgroundImage:`url(${playerPic})`, 
+                      backgroundRepeat:"no-repeat",
+                      backgroundSize:"200px 150px",
+                      backgroundPosition:"center", 
+                      height:"150px", 
+                      width:"200px"}}>
+                    </Grid>
+                    <Grid item xs={4} sx={{justifyContent:"center"}}>
+                      <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>{player.name}</Typography>
+                    </Grid>
+                    <Grid item xs={3} justifyContent={"center"} sx={{
+                      backgroundImage:`url(${teamLogo})`, 
+                      backgroundRepeat:"no-repeat",
+                      backgroundSize:"200px 150px", 
+                      backgroundPosition:"center",
+                      height:"150px", 
+                      width:"200px"}}>
+                    </Grid>
+                    <Grid item xs={1}>
+                    <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>${player.valor}</Typography>
+                    </Grid>
+                  </Grid>
+                 
+
+                </ListItem>
+                <Divider/>
+                </>
+            )})}
               
-            })}
-              
-              <ListItem>
-                <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${playerPic})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px",
-                    backgroundPosition:"center", 
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={4} sx={{justifyContent:"center"}}>
-                    <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>Grevthar</Typography>
-                  </Grid>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${teamLogo})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px", 
-                    backgroundPosition:"center",
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={2}>
-                  <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>$19</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <Divider/>
-              <ListItem>
-                <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${playerPic})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px",
-                    backgroundPosition:"center", 
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={4} sx={{justifyContent:"center"}}>
-                    <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>Grevthar</Typography>
-                  </Grid>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${teamLogo})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px", 
-                    backgroundPosition:"center",
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={2}>
-                  <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>$19</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <Divider/>
-              <ListItem>
-                <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${playerPic})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px",
-                    backgroundPosition:"center", 
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={4} sx={{justifyContent:"center"}}>
-                    <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>Grevthar</Typography>
-                  </Grid>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${teamLogo})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px", 
-                    backgroundPosition:"center",
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={2}>
-                  <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>$19</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <Divider/>
-              <ListItem>
-                <Grid container direction={"row"} display={"flex"} justifyItems="center" alignItems={"center"}>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${playerPic})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px",
-                    backgroundPosition:"center", 
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={4} sx={{justifyContent:"center"}}>
-                    <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>Grevthar</Typography>
-                  </Grid>
-                  <Grid item xs={3} justifyContent={"center"} sx={{
-                    backgroundImage:`url(${teamLogo})`, 
-                    backgroundRepeat:"no-repeat",
-                    backgroundSize:"200px 150px", 
-                    backgroundPosition:"center",
-                    height:"150px", 
-                    width:"200px"}}>
-                  </Grid>
-                  <Grid item xs={2}>
-                  <Typography display={"flex"} sx={{background:"grey",justifyContent:"center"}} variant='h6'>$19</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
           </List>
         </Grid>
       </Grid>

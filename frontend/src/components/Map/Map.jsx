@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Paper, Typography, Toolbar, AppBar, FormGroup, FormControl, TextField, Button, Grid, Divider, IconButton, Dialog, Avatar } from "@mui/material";
 import map from "../../assets/images/Summoners_Rift_Map.png"
 import playerPic from "../../assets/images/player_sample.webp";
@@ -42,6 +42,8 @@ function Map(props) {
                 break;
         }
     };
+
+    useEffect(()=>{props.setEscalacao([top,jg,mid,adc,sup]); console.log([top,jg,mid,adc,sup])},[top,jg,mid,adc,sup]);
 
     return (
     <>
